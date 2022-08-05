@@ -1,21 +1,22 @@
+
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "mckinsey",
     "database": "Notebook",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "root",
+    "password": "mckinsey",
     "database": "Notebook",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "root",
+    "password": "mckinsey",
     "database": "Notebook",
     "host": "localhost",
     "dialect": "mysql"

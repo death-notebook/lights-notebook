@@ -1,18 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { Person } = require("../models");
+const { People } = require("../models");
 
 // Get a single person by ID
 router.get("/:id", async (req, res, next) => {
-  const person = await Person.findByPk(req.params.id);
-  res.json(person);
+  const people = await People.findByPk(req.params.id);
+  res.json(people);
 });
 
-// GET /Person -- get all Persons
+// GET /People -- get all People
 router.get("/", async (req, res, next) => {
   try {
-    const persons = await Person.findAll();
-    res.json(persons);
+    const people = await People.findAll();
+    res.json(people);
   } catch (error) {
     next(error);
   }
@@ -20,14 +20,14 @@ router.get("/", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    const persons = await Person.destroy({
+    const people = await People.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-    const updatedPerson = await Person.findAll();
-    res.json(updatedPerson);
+    const updatedPeople = await People.findAll();
+    res.json(updatedPeople);
   } catch (error) {
     next(error);
   }
@@ -35,8 +35,8 @@ router.delete("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const newPerson = await Person.create(req.body);
-    res.json(newPerson);
+    const newPeople = await People.create(req.body);
+    res.json(newPeople);
   } catch (error) {
     next(error);
   }
@@ -45,13 +45,13 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const newPerson = await Person.update(req.body, {
+    const newPeople = await People.update(req.body, {
       where: {
         id: req.params.id,
       },
       returning: true,
     });
-    res.json(newPerson);
+    res.json(newPeople);
   } catch (error) {
     next(error);
   }

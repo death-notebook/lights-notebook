@@ -4,6 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser');
 const db = require('./models')
 const PeopleRoute = require('./routes/people')
+require("dotenv").config();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -13,7 +14,7 @@ app.use(express.urlencoded({extended:true}));
 app.use('/people',PeopleRoute)
 
 db.sequelize.sync().then(() => {
-    app.listen(4306,() => {
-        console.log('Running on port 4306...')
+    app.listen(process.env.PORT,() => {
+        console.log(`Running on port ${process.env.PORT}...`)
     })
 })

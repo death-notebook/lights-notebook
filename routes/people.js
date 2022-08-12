@@ -51,7 +51,8 @@ router.put("/:id", async (req, res, next) => {
       },
       returning: true,
     });
-    res.json(newPeople);
+    const updatedPerson = await People.findByPk(req.params.id);
+    res.json(updatedPerson);
   } catch (error) {
     next(error);
   }

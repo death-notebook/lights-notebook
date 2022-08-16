@@ -5,7 +5,7 @@ const { People } = require("../models");
 // Get a single person by ID
 router.get("/:id", async (req, res, next) => {
   const people = await People.findByPk(req.params.id);
-  res.json(people);
+  res.send(people);
 });
 
 // GET /People -- get all People

@@ -3,7 +3,7 @@ module.exports = (sequelize,DataTypes)=>{
     const People = sequelize.define("People",{
         name:{
             type:DataTypes.STRING,
-            //allowNull:false
+            allowNull:false
         },
         image:{
             type:DataTypes.STRING,
@@ -11,7 +11,7 @@ module.exports = (sequelize,DataTypes)=>{
         },
         cause:{
             type:DataTypes.STRING,
-            //allowNull:false
+            allowNull:false
         },
         time:{
             type:DataTypes.STRING,

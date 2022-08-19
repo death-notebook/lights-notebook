@@ -15,7 +15,7 @@ app.use(express.urlencoded({extended:true}));
 app.use('/people',PeopleRoute)
 app.use('/user',UserRoute)
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force: true}).then(() => {
     app.listen(process.env.PORT,() => {
         console.log(`Running on port ${process.env.PORT}...`)
     })

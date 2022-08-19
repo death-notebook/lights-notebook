@@ -17,16 +17,14 @@ router.post("/", async (req, res, next) => {
   try {
     const {username, password} = req.body
     const bcrypassword = await bcrypt.hash(password,SALT_COUNT)
-    console.log("hashed", bcrypassword)
     const newUser= await User.create({ username, password: bcrypassword});
-    console.log("this is new user", newUser)
     const token = jwt.sign({id: newUser.id, username: newUser.username}, JWT_SECRET) // generates a token
-    console.log("this is new token", token)
     res.json(newUser);
   } catch (error) {
     next(error);
   }
 });
+
 
 // Get for signin
 router.get("/login", async (req, res, next) => {

@@ -27,5 +27,9 @@ module.exports = (sequelize,DataTypes)=>{
         }
     })
 
+    People.associate = (models)=>{
+        People.belongsTo(models.User);
+    }
+
   return People
 };

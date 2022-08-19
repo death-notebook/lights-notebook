@@ -29,7 +29,7 @@ module.exports = (sequelize,DataTypes)=>{
         User.hasMany(models.People, {
             onDelete: 'cascade',
             foreignKey:'userId',
-            as:"createdby"
+            as:"Author"
         })
     }
 

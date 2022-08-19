@@ -1,18 +1,34 @@
 const express = require("express");
 const router = express.Router();
-const { People } = require("../models");
+const { People, User } = require("../models");
 
 // Get a single person by ID
 router.get("/:id", async (req, res, next) => {
-  const people = await People.findByPk(req.params.id);
-  res.send(people);
+  try {
+    if (!req.user) res.sendStatus(401);
+    else {
+      const people = await People.findByPk(req.params.id, {
+        include: [{
+          model: User
+        }]
+      });
+      if (people.userId !== req.user.id && req.user.role !== 'admin') res.sendStatus(401);
+      else next(people);
+    }
+  } catch (error) {
+    next(error);
+  }
+  
 });
 
 // GET /People -- get all People
 router.get("/", async (req, res, next) => {
   try {
-    const people = await People.findAll();
-    res.json(people);
+    if (!req.user) res.sendStatus(401);
+    else {
+      const people = await People.findAll(req.user.role === 'admin' ? {} : { where: { userId: req.user.id } });
+      next(people);
+    }
   } catch (error) {
     next(error);
   }
@@ -20,14 +36,21 @@ router.get("/", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    const people = await People.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
+    if (!req.user) res.sendStatus(401);
+    else {
+      const foundPerson = await People.findByPk(req.params.id);
+      if (foundPerson.userId !== req.user.id && req.user.role !== 'admin') res.sendStatus(401);
+      else {
+        await People.destroy({
+          where: {
+            id: req.params.id,
+          },
+        });
 
-    const updatedPeople = await People.findAll();
-    res.json(updatedPeople);
+        const updatedPeople = await People.findAll();
+        next(updatedPeople);
+      }
+    }
   } catch (error) {
     next(error);
   }
@@ -35,8 +58,12 @@ router.delete("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const newPeople = await People.create(req.body);
-    res.json(newPeople);
+    if (!req.user) res.sendStatus(401);
+    else {
+      ({ name, image, cause, time, verifier, history } = req.body);
+      const newPeople = await People.create({ name, image, cause, time, verifier, history, userId: req.user.id });
+      next(newPeople);
+    }
   } catch (error) {
     next(error);
   }
@@ -45,14 +72,20 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const newPeople = await People.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-      returning: true,
-    });
-    const updatedPerson = await People.findByPk(req.params.id);
-    res.json(updatedPerson);
+    if (!req.user) res.sendStatus(401);
+    else {
+      const foundPerson = await People.findByPk(req.params.id);
+      if (foundPerson.userId !== req.user.id && req.user.role !== 'admin') res.sendStatus(401);
+      else {
+        await People.update(req.body, {
+          where: {
+            id: req.params.id,
+          }
+        });
+        const result = await People.findByPk(req.params.id);
+        next(result);
+      }
+    }
   } catch (error) {
     next(error);
   }

@@ -13,7 +13,7 @@ router.get("/:id", async (req, res, next) => {
         }]
       });
       if (people.userId !== req.user.id && req.user.role !== 'admin') res.sendStatus(401);
-      else next(people);
+      else next(people);   //where is the response?
     }
   } catch (error) {
     next(error);
@@ -40,7 +40,7 @@ router.delete("/:id", async (req, res, next) => {
     else {
       const foundPerson = await People.findByPk(req.params.id);
       if (foundPerson.userId !== req.user.id && req.user.role !== 'admin') res.sendStatus(401);
-      else {
+      else {        //users should able to delete their own entry
         await People.destroy({
           where: {
             id: req.params.id,
@@ -76,8 +76,8 @@ router.put("/:id", async (req, res, next) => {
     else {
       const foundPerson = await People.findByPk(req.params.id);
       if (foundPerson.userId !== req.user.id && req.user.role !== 'admin') res.sendStatus(401);
-      else {
-        await People.update(req.body, {
+      else {   //users should be able to edit their own entry
+        await People.update(req.body, {   //vurnerable for injection / need destructing 
           where: {
             id: req.params.id,
           }

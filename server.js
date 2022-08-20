@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -8,7 +9,7 @@ const UserRoute = require('./routes/user')
 const cookieParser = require("cookie-parser");
 const jwt = require('jsonwebtoken');
 const { User } = require("./models");
-require("dotenv").config();
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
+//Authentication middleware
 const setUser = async (req, res, next) => {
     try {
         const token = req.cookies.token;
@@ -29,11 +31,12 @@ const setUser = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+} 
 app.use(setUser);
 app.use('/people',PeopleRoute)
 app.use('/user',UserRoute)
 
+//Authorization middleware 
 app.use(async (result, req, res, next) => {
     try {
         const existingUser = await User.findOne({where: {username: req.user ? req.user.username : result}}); //username:'username', password: hashed string
@@ -50,8 +53,9 @@ app.use(async (result, req, res, next) => {
     }
 })
 
+//Error handling middleware
 app.use((error, req, res, next) => {
-    console.error("SERVER ERROR: ", error);
+    console.error("SERVER ERROR: ", error);     //what does this means 
     if (res.statusCode < 400) res.status(500);
     res.send({
       error: error.message,

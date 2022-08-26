@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { body, validationResult } = require('express-validator');
 const { People, User } = require("../models");
 
 // Get a single person by ID
@@ -46,7 +47,6 @@ router.delete("/:id", async (req, res, next) => {
             id: req.params.id,
           },
         });
-
         const updatedPeople = await People.findAll();
         next(updatedPeople);
       }
@@ -56,7 +56,10 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/",body('name').not().isEmpty().trim().escape(),
+                body('cause').not().isEmpty().trim().escape(),
+                body('time').not().isEmpty().trim().escape(),
+               async (req, res, next) => {
   try {
     if (!req.user) res.sendStatus(401);
     else {

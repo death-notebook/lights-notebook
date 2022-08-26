@@ -37,11 +37,11 @@ A back end focused database application that contains a list of names of crimina
  2. `npm start`
 
 ## Project Presentation
-- [Video](https://)
+- [Video]()
 
 ## Useful Links
 - [Deployed App](https://lights-notebook.herokuapp.com/)
 - [Project Board](https://github.com/orgs/death-notebook/projects/1)
 
 ## Acknowledgements
-Special thanks to McKinsey & Co., ConvergeOne, and Citizens Bank for providing our team with opportunities to pursue our career ambitions, and establish a healthy environment of growth and support to develop our skills as software engineers.
+Special thanks to McKinsey & Co., ConvergeOne, and Citizens Bank for providing our team with opportunities to pursue our career ambitions, and establishing a healthy environment of growth and support to develop our skills as software engineers.

@@ -46,6 +46,7 @@ router.get("/login", async (req, res, next) => {
     const existingUser = await User.findOne({ where: { username } }); //username:'username', password: hashed string
     const isAMatch = await bcrypt.compare(password, existingUser.password) // returns a boolean
     if (isAMatch) {
+      delete req.user;
       next(username);
     } else {
       res.sendStatus(401).send('USER DOES NOT EXIST')

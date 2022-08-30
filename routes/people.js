@@ -47,7 +47,7 @@ router.delete("/:id", async (req, res, next) => {
             id: req.params.id,
           },
         });
-        const updatedPeople = await People.findAll();
+        const updatedPeople = await People.findAll(req.user.role === 'admin' ? {} : { where: { userId: req.user.id } });
         next(updatedPeople);
       }
     }

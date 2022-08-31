@@ -38,7 +38,7 @@ A back end focused database application that contains a list of names of crimina
  2. `npm start`
 
 ## Project Presentation
-- ![Video](https://www.youtube.com/watch?v=KYWUd_Az7I4)
+- [![Video](https://img.youtube.com/vi/KYWUd_Az7I4/maxresdefault.jpg)](https://www.youtube.com/watch?v=KYWUd_Az7I4)
 
 ## Useful Links
 - [Deployed App](https://lights-notebook.herokuapp.com/)

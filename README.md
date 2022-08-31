@@ -1,7 +1,7 @@
 # <p align="center">Lights Notebook</p>
 ### <p align="center">**Yared Gari, Reese Gosain, Mario Brown, & Jordan Hornback**</p>
 
-A back end focused database application that contains a list of names of criminals who are destined to die, each with attributes such as image, cause of death, time of death, and the name of the person who verified their death. This project is a deployed application through Heroku, and uses **Javascript**, **Node.js**, **MySQL**, **Express**, and **Seqeulize** to store names in a MySQL database, register and login users under admin or standard user roles, perform CRUD operations, and handle request errors. All testing of our endpoints was performed using the Postman API platform.
+A back end focused database application that contains a list of names of criminals who are destined to die, each with attributes such as image, cause of death, time of death, and the name of the person who verified their death. This project is a deployed application through Heroku, and uses **Javascript**, **Node.js**, **MySQL**, **Express**, and **Seqeulize** to store names in a MySQL database, register and login users under admin or standard user roles, perform CRUD operations, validate inputs, and handle request errors. All testing of our endpoints was performed using the Postman API platform.
 
 ## Table of Contents
 

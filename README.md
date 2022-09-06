@@ -31,7 +31,7 @@ A back end focused database application that contains a list of names of crimina
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [Postman](https://www.postman.com/)
 - [MySQL Workbench](https://www.mysql.com/products/workbench/)
-- [Heoku](https://www.heroku.com/)
+- [Heroku](https://www.heroku.com/)
 
  ## Usage instructions
 
